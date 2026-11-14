@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Komlan Kekeli Batchey</title>
+  <meta name="description" content="Komlan Kekeli Batchey, PhD candidate in Plant Breeding, University of Florida. Genetic mapping and disease resistance breeding in tomato and pepper.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbf9f5;
+      --ink: #24211d;
+      --muted: #6f675e;
+      --rule: #e6dfd4;
+      --accent: #b5402a;   /* tomato red */
+      --leaf: #3f6b3a;     /* calyx green */
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { margin: 0; background: var(--bg); color: var(--ink);
+           font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif; font-size: 1.02rem; line-height: 1.7; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .layout { max-width: 1180px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 320px 1fr; gap: 4.5rem; }
+
+    /* Sidebar */
+    aside { position: sticky; top: 0; align-self: start; padding: 3.5rem 0 2rem; }
+    .photo { width: 100%; max-width: 320px; height: auto; border-radius: 14px; background: #efe9df; display: block; margin-bottom: 1.6rem; }
+    h1 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 2.3rem; line-height: 1.12; margin: 0 0 .9rem; letter-spacing: -0.01em; }
+    .role { color: var(--muted); margin: 0 0 1rem; line-height: 1.55; }
+    .email { color: var(--muted); font-size: .95rem; margin: 0 0 1.4rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--rule); }
+    .links { display: flex; flex-wrap: wrap; gap: .4rem 1.3rem; font-weight: 600; margin-bottom: 1.8rem; }
+    .toc { list-style: none; padding: 0; margin: 0; font-size: .9rem; }
+    .toc li { margin: .25rem 0; }
+    .toc a { color: var(--muted); }
+    .toc a:hover { color: var(--accent); text-decoration: none; }
+
+    /* Main */
+    main { padding: 3.5rem 0 3rem; min-width: 0; }
+    .banner-wrap { max-width: 1180px; margin: 0 auto; padding: 1.2rem 2rem 0; }
+    .banner { margin: 0; position: relative; border-bottom: 1px solid var(--rule); }
+    #banner { display: block; width: 100%; height: 280px; cursor: pointer; }
+    #banner:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .banner figcaption { position: absolute; left: 0; bottom: .7rem; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); pointer-events: none; }
+    .banner .hint { letter-spacing: .08em; }
+    .hero { padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+    .hero p { margin: 0 0 1rem; max-width: 62ch; }
+    #stage { color: var(--accent); font-weight: 600; }
+
+    section { padding: 2.6rem 0 .6rem; scroll-margin-top: 1rem; }
+    h2 { font-size: .85rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin: 0 0 1.6rem; }
+    h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 1.3rem; margin: 0 0 .35rem; line-height: 1.3; }
+    h4 { font-size: .8rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin: 2rem 0 .6rem; }
+    p { margin: 0 0 1rem; }
+
+    .project { background: var(--card); border: 1px solid var(--rule); border-left: 4px solid var(--accent); border-radius: 8px;
+               padding: 1.3rem 1.5rem; margin-bottom: 1.2rem; }
+    .project:nth-of-type(2n) { border-left-color: var(--leaf); }
+    .project p { margin-bottom: .6rem; }
+    .tag { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+    .pubs { list-style: none; padding: 0; margin: 0; }
+    .pubs li { display: grid; grid-template-columns: 4.5rem 1fr; gap: 1rem; padding: .85rem 0; border-top: 1px solid var(--rule); }
+    .pubs li:last-child { border-bottom: 1px solid var(--rule); }
+    .year { color: var(--accent); font-weight: 600; font-size: .92rem; }
+    .venue { font-style: italic; }
+
+    .entry { padding: 1rem 0; border-top: 1px solid var(--rule); }
+    .entry:last-child { border-bottom: 1px solid var(--rule); }
+    .item { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: baseline; }
+    .item .tag { white-space: nowrap; text-align: right; }
+    .entry p { margin: .3rem 0 0; color: #3d3832; }
+
+    .strip { display: flex; flex-wrap: wrap; gap: .9rem; margin: 1rem 0 .4rem; }
+    .strip figure { margin: 0; display: table; }
+    .strip img { height: 190px; width: auto; display: block; border-radius: 6px; background: #efe9df; }
+    .strip figcaption { display: table-caption; caption-side: bottom; font-size: .8rem; line-height: 1.4; color: var(--muted); padding-top: .35rem; }
+    section > .strip { margin: 0 0 1.6rem; }
+    .plain { padding-left: 1.1rem; margin: 0 0 1rem; }
+    .plain li { margin-bottom: .5rem; }
+    .plain li::marker { color: var(--accent); }
+
+    footer { padding: 2rem 0 3rem; font-size: .8rem; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; gap: 0; padding: 0 1.3rem; }
+      aside { position: static; padding-bottom: 0; }
+      .toc { display: none; }
+      .banner-wrap { padding: 1rem 1.3rem 0; }
+      #banner { height: 200px; }
+      .pubs li { grid-template-columns: 1fr; gap: .15rem; }
+      .strip img { height: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="banner-wrap">
+  <figure class="banner">
+    <canvas id="banner" tabindex="0" role="button" aria-label="DNA double helix made of points. Click to change it into a tomato, then a pepper."></canvas>
+    <figcaption><span id="stage">DNA</span> <span class="hint">· Click to change</span></figcaption>
+  </figure>
+</div>
+
+<div class="layout">
+  <aside>
+    <img class="photo" src="images/profile.jpg" alt="Komlan Kekeli Batchey" onerror="this.style.visibility='hidden'">
+    <h1>Komlan Kekeli Batchey</h1>
+    <p class="role">PhD Candidate, Plant Breeding<br>University of Florida<br>Gulf Coast Research and Education Center</p>
+    <p class="email">kbatchey [at] ufl [dot] edu</p>
+    <div class="links">
+      <a href="files/CV_KomlanBatchey.pdf">CV</a>
+      <a href="mailto:Kbatchey@ufl.edu">Email</a>
+      <a href="https://www.linkedin.com/in/komlan-kekeli-b-3a4482126/">LinkedIn</a>
+      <!-- Add when ready:
+      <a href="https://scholar.google.com/citations?user=YOUR-ID">Google Scholar</a> -->
+    </div>
+    <ul class="toc" aria-label="Sections">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#presentations">Presentations</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#leadership">Leadership &amp; Service</a></li>
+      <li><a href="#awards">Awards &amp; Fellowships</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <div class="hero">
+      <div>
+        <p>I am a PhD candidate in Plant Breeding at the University of Florida, based at the Gulf Coast Research and Education Center in Wimauma, Florida. My research focuses on genetic mapping and disease resistance breeding in tomato and pepper, combining field trials, molecular markers, and data analysis to develop improved cultivars.</p>
+        <p>I hold an MBA in Business Management from the University of São Paulo (2024) and a B.S. in Agricultural Sciences from EARTH University, Costa Rica (2021). I speak Ewe, French, English, and Spanish, and intermediate Portuguese.</p>
+      </div>
+    </div>
+
+<section id="research">
+    <h2>Research</h2>
+
+    <div class="project">
+      <div>
+        <h3>Resistance to target spot in tomato</h3>
+        <p>Evaluating foliar and fruit responses of tomato breeding lines to <i>Corynespora cassiicola</i>, the cause of target spot, to identify resistant lines for cultivar development, and validating candidate genes with CRISPR/Cas9.</p>
+        <span class="tag">ASHS 2026, Tomato Breeders Roundtable 2026, Plant Science Symposium 2026</span>
+        <div class="strip">
+          <figure><img src="images/inoculation-corynespora.jpg" alt="Spraying tomato plants with fungal inoculum in a nethouse" loading="lazy"><figcaption>Inoculating plants with <i>Corynespora cassiicola</i></figcaption></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <h3>Genetic mapping of internal white tissue</h3>
+        <p>Mapping the genetic basis of internal white tissue, a fruit quality disorder in tomato, and developing molecular markers to support selection.</p>
+        <span class="tag">Tomato Field Day 2025, Plant Science Symposium 2025</span>
+        <div class="strip">
+          <figure><img src="images/iwt-scoring.jpg" alt="Komlan placing sliced tomatoes for imaging" loading="lazy"><figcaption>Scanning sliced tomato fruits to score internal white tissue</figcaption></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <h3>Field trials and marker-assisted breeding</h3>
+        <p>Designing replicated field trials (60–70 genotypes per season) and running DNA extraction, PCR, and HRM genotyping on over 1,000 samples per year, including work on <i>Xanthomonas</i> resistance in tomato and pepper.</p>
+        <div class="strip">
+          <figure><img src="images/field-data-collection.jpg" alt="Komlan holding a clipboard between rows of staked tomato plants" loading="lazy"><figcaption>Data collection day in the field</figcaption></figure>
+          <figure><img src="images/harvest.jpg" alt="Komlan with crates of harvested tomatoes in the field" loading="lazy"><figcaption>Harvest season in the tomato lab</figcaption></figure>
+          <figure><img src="images/nethouse-planting.jpg" alt="Komlan transplanting tomato seedlings in a nethouse" loading="lazy"><figcaption>Planting in the nethouse</figcaption></figure>
+          <figure><img src="images/greenhouse.jpg" alt="Komlan examining tomato fruit on greenhouse plants" loading="lazy"><figcaption>Checking tomato fruit in the greenhouse</figcaption></figure>
+          <figure><img src="images/tissue-culture.jpg" alt="Komlan working with tissue culture plates in a biosafety cabinet" loading="lazy"><figcaption>Tissue culture work</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+    <ul class="pubs">
+      <li><span class="year">2025</span><div>Harnessing plant ferritins to manage iron homeostasis and enhance crop resilience: An overview. T. Ketehouli, C.-H. Wang, I. C. K. Foka, K. D. Aloryi, <b>K. K. Batchey</b>, B. Karikari. <span class="venue">Plant Stress</span>.</div></li>
+      <li><span class="year">2021</span><div>Impact of public policy interventions on welfare of cocoa farmers in Ghana and Togo. G. E. Amponsah, <b>K. K. Batchey</b>, T. Wünscher. <span class="venue">EARTH University</span>, undergraduate research report.</div></li>
+    </ul>
+  </section>
+
+  <section id="presentations">
+    <h2>Presentations</h2>
+    <div class="strip">
+      <figure><img src="images/ashs-2026.jpg" alt="Komlan next to his target spot resistance poster" loading="lazy"><figcaption>Presenting research at ASHS 2026</figcaption></figure>
+      <figure><img src="images/plant-science-symposium-2025.jpg" alt="Komlan explaining his internal white tissue poster to a visitor" loading="lazy"><figcaption>Presenting a poster at the 2025 Plant Science Symposium, UF, Gainesville</figcaption></figure>
+    </div>
+    <ul class="pubs">
+      <li><span class="year">2026</span><div>Target spot resistance in tomato: Fruit stage-dependent susceptibility and CRISPR/Cas9-mediated functional validation. American Society for Horticultural Science (ASHS) Annual Conference.</div></li>
+      <li><span class="year">2026</span><div>Foliar and fruit responses of tomato breeding lines to <i>Corynespora cassiicola</i> inoculation. Tomato Breeders Roundtable and Tomato Disease Workshops, Fort Myers, FL.</div></li>
+      <li><span class="year">2026</span><div>Foliar and fruit responses of tomato breeding lines to <i>Corynespora cassiicola</i> inoculation. 10th Plant Science Symposium, Gainesville, FL.</div></li>
+      <li><span class="year">2025</span><div>Internal white tissue disorder in tomatoes (<i>Solanum lycopersicum</i>): Genetic mapping and molecular marker development. Tomato Field Day, Balm, FL.</div></li>
+      <li><span class="year">2025</span><div>Internal white tissue disorder in tomatoes (<i>Solanum lycopersicum</i>): Genetic mapping and molecular marker development. 9th Plant Science Symposium, Gainesville, FL.</div></li>
+    </ul>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="entry">
+      <div class="item"><span><b>Graduate Research Assistant</b>, Plant Genetics and Genomics, UF Gulf Coast Research and Education Center</span><span class="tag">2022 – present</span></div>
+      <p>Genetic mapping and disease resistance breeding in tomato and pepper; field trial design and phenotyping; HRM genotyping; data analysis in R; training graduate students, interns, and military veterans.</p>
+    </div>
+    <div class="entry">
+      <div class="item"><span><b>Agricultural Technology Services</b>, Center for Research and Opinion Polls, Lomé, Togo</span><span class="tag">2022</span></div>
+      <p>Designed farmer surveys for tomato, rice, and maize systems and conducted 100+ field interviews to identify production constraints.</p>
+    </div>
+    <div class="entry">
+      <div class="item"><span><b>Agronomy &amp; Consulting</b>, PECEGE, São Paulo, Brazil</span><span class="tag">2021</span></div>
+      <p>Worked with commercial bean and sugarcane producers, curated research datasets, and translated technical reports for the Confederation of Agriculture and Livestock of Brazil.</p>
+    </div>
+    <div class="entry">
+      <div class="item"><span><b>Research &amp; Development</b>, Kawan Africa, Cotonou, Benin</span><span class="tag">2020</span></div>
+      <p>Worked with 30+ women tomato farmers on organic pest management and helped set up a tomato processing operation.</p>
+    </div>
+    <div class="entry">
+      <div class="item"><span><b>Urban Agriculture &amp; Circular Farming</b>, Dirt to Power Initiative</span><span class="tag">2018 – 2020</span></div>
+      <p>Helped secure $25,000 (Ford Prize, 2018) for a sustainable urban farming model in Nigeria; managed a greenhouse and trained community members.</p>
+    </div>
+    <div class="entry">
+      <div class="item"><span><b>Teaching Assistant</b>, EARTH University (Dr. Irene Alvarado)</span><span class="tag"></span></div>
+      <p>Assisted with weekly course activities and translated materials from Spanish into French and English.</p>
+    </div>
+  </section>
+
+  <section id="leadership">
+    <h2>Leadership &amp; Service</h2>
+    <ul class="plain">
+      <li><b>Organizing Committee,</b> African Plant Symposium Series, 2025 – present: international webinars and an annual symposium connecting plant science research across Africa and global institutions</li>
+      <li><b>Member,</b> UF Plant Science Council, 2024 – present</li>
+      <li><b>Volunteer,</b> World Masters Athletics Championships, Gainesville, FL, 2025</li>
+      <li><b>Board Member,</b> Miledou Projects, Côte d’Ivoire and Togo, 2019 – 2021: seven farming and poultry projects for young entrepreneurs</li>
+      <li><b>Vice President,</b> African Student Union, EARTH University, 2019 – 2020</li>
+    </ul>
+  </section>
+
+  <section id="awards">
+    <h2>Awards &amp; Fellowships</h2>
+    <ul class="plain">
+      <li><b>Dr. Elaine Turner Plant Breeding Scholarship,</b> University of Florida, 2024 – 2025</li>
+      <li><b>Resolution Project Fellowship,</b> 2018 – 2021: $3,000 seed funding for a drone-based soil analysis and mapping project for smallholder farmers</li>
+      <li><b>Wege Prize Global Finalist,</b> 2018 – 2020</li>
+      <li><b>Clinton Global Initiative University Fellow,</b> 2018 – 2021</li>
+      <li><b>Mastercard Foundation Scholar,</b> EARTH University, 2017 – 2021</li>
+      <li><b>Net Impact Ambassador,</b> 2019 – 2020</li>
+      <li><b>Leadership Award,</b> EARTH University, 2020</li>
+    </ul>
+    <h4>Media</h4>
+    <ul class="plain">
+      <li><a href="https://www.linkedin.com/posts/uf-ifas-plant-breeding_student-spotlight-komlan-kekeli-batchey-ugcPost-7390052116964278272-14zV">Student Spotlight</a>, UF Plant Breeding Graduate Program (2025)</li>
+      <li><a href="https://www.earth.ac.cr/a-leader-in-plant-genetics-and-food-security/">A Leader in Plant Genetics and Food Security</a>, EARTH University Alumni Stories (2025)</li>
+      <li><a href="https://www.africanleadershipacademy.org/2020/12/17/haissa-toure-15-and-komlan-batchey-15-collaborate-to-develop-organic-agribusiness-solution-in-benin/">Developing Organic Agribusiness Solution in Benin</a>, African Leadership Academy Spotlight (2022)</li>
+    </ul>
+    <h4>Affiliations</h4>
+    <p>National Association of Plant Breeders · Sigma Xi · Crop Science Society of America · National Society of Leadership and Success</p>
+  </section>
+
+    <footer>Last updated November 2026</footer>
+  </main>
+</div>
+
+<script>
+// Banner: a long horizontal DNA helix made of points. Click to turn it into a tomato, then a pepper, then back.
+(function () {
+  var canvas = document.getElementById('banner');
+  var stageEl = document.getElementById('stage');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function smooth(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
+
+  var N = 16000;
+  // Per shape: position (3), normal (3), color (3), lit flag
+  function shape() { return { p: new Float32Array(N * 3), n: new Float32Array(N * 3), c: new Float32Array(N * 3), lit: new Uint8Array(N) }; }
+  function set(s, i, x, y, z, nx, ny, nz, col, lit) {
+    s.p[i * 3] = x; s.p[i * 3 + 1] = y; s.p[i * 3 + 2] = z;
+    s.n[i * 3] = nx; s.n[i * 3 + 1] = ny; s.n[i * 3 + 2] = nz;
+    s.c[i * 3] = col[0]; s.c[i * 3 + 1] = col[1]; s.c[i * 3 + 2] = col[2]; s.lit[i] = lit;
+  }
+  function surfaceNormal(f, a, b) {
+    var p = f(a, b), u = f(a + 0.004, b), v = f(a, b + 0.004);
+    var ux = u[0] - p[0], uy = u[1] - p[1], uz = u[2] - p[2], vx = v[0] - p[0], vy = v[1] - p[1], vz = v[2] - p[2];
+    var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+    if (nx * p[0] + ny * (p[1] + 0.1) + nz * p[2] < 0) { nx = -nx; ny = -ny; nz = -nz; }
+    return [p, [nx, ny, nz]];
+  }
+
+  // ---------- Tomato ----------
+  var TOM = shape(), RED = [198, 42, 32], CALYX = [58, 112, 46];
+  function tomatoSurf(ct, phi) {
+    ct = clamp(ct, -1, 1);
+    var st = Math.sqrt(1 - ct * ct), rib = 1 + 0.045 * Math.cos(6 * phi) * st;
+    var y = 0.82 * 0.8 * ct - 0.13 * Math.exp(-Math.pow(Math.acos(ct) / 0.38, 2));
+    return [0.82 * rib * st * Math.cos(phi), y, 0.82 * rib * st * Math.sin(phi)];
+  }
+  var topT = 0.82 * 0.8 - 0.13;
+  for (var i = 0; i < N; i++) {
+    if (i < N * 0.93) {
+      var r = surfaceNormal(tomatoSurf, 1 - 2 * Math.random(), Math.random() * Math.PI * 2);
+      set(TOM, i, r[0][0], r[0][1], r[0][2], r[1][0], r[1][1], r[1][2], RED, 1);
+    } else if (i < N * 0.985) {
+      var k = Math.floor(Math.random() * 6), ka = k / 6 * Math.PI * 2, t = Math.random();
+      var hw = 0.07 * Math.sin(Math.PI * Math.pow(t, 0.6)), d = 0.03 + t * 0.48;
+      var ang = ka + (Math.random() - 0.5) * 2 * hw / Math.max(d, 0.05);
+      set(TOM, i, d * Math.cos(ang), topT + 0.04 + 0.06 * Math.sin(Math.PI * t) - 0.1 * t * t, d * Math.sin(ang), 0, 1, 0, CALYX, 1);
+    } else {
+      var h = Math.random(), ma = Math.random() * Math.PI * 2;
+      set(TOM, i, 0.045 * Math.cos(ma) + 0.04 * h * h, topT + 0.05 + h * 0.2, 0.045 * Math.sin(ma), Math.cos(ma), 0, Math.sin(ma), CALYX, 1);
+    }
+  }
+
+  // ---------- Bell pepper ----------
+  var PEP = shape(), PGREEN = [62, 138, 52], PSTEM = [48, 92, 38];
+  function pepperSurf(u, phi) {           // u: 0 bottom -> 1 top; blocky bell shape with four lobes
+    u = clamp(u, 0, 1);
+    var body = 0.58 * Math.pow(Math.min(1, u / 0.16), 0.45);                         // rounded bottom
+    var shoulder = u > 0.82 ? Math.sqrt(Math.max(0, 1 - Math.pow((u - 0.82) / 0.18, 2))) : 1;
+    var prof = (0.5 + 0.08 * u) / 0.58 * body * shoulder + 0.03;
+    var lobe = 1 + 0.17 * Math.cos(4 * phi);
+    var y = -0.8 + 1.38 * u;
+    if (u < 0.08) y += 0.06 * Math.max(0, Math.cos(4 * phi)) * (0.08 - u) / 0.08 * 1.5;  // four bumps on the bottom
+    if (u > 0.9) y -= (u - 0.9) * 1.2;                                                    // dip around the stem
+    return [prof * lobe * Math.cos(phi), y, prof * lobe * Math.sin(phi)];
+  }
+  for (i = 0; i < N; i++) {
+    if (i < N * 0.93) {
+      var r2 = surfaceNormal(pepperSurf, Math.random(), Math.random() * Math.PI * 2);
+      set(PEP, i, r2[0][0], r2[0][1], r2[0][2], r2[1][0], r2[1][1], r2[1][2], PGREEN, 1);
+    } else if (i < N * 0.965) {          // calyx disc
+      var ca = Math.random() * Math.PI * 2, cr = 0.05 + Math.random() * 0.13;
+      set(PEP, i, cr * Math.cos(ca), 0.48 + 0.03 * (1 - cr / 0.18), cr * Math.sin(ca), 0, 1, 0, PSTEM, 1);
+    } else {                              // thick curved stem
+      var sh = Math.random(), sa = Math.random() * Math.PI * 2, sr = 0.06;
+      set(PEP, i, sr * Math.cos(sa) + 0.12 * sh * sh, 0.5 + sh * 0.3, sr * Math.sin(sa), Math.cos(sa), 0, Math.sin(sa), PSTEM, 1);
+    }
+  }
+
+  // ---------- Horizontal DNA (rebuilt on resize to fill the banner width) ----------
+  var DNA = shape(), INK = [45, 42, 38];
+  var BASE = { A: [46, 125, 50], T: [196, 52, 40], C: [40, 95, 180], G: [214, 150, 30] }, PAIR = { A: 'T', T: 'A', C: 'G', G: 'C' };
+  var DROLE = new Uint8Array(N), DS = new Float32Array(N), DT = new Float32Array(N), DJ = new Float32Array(N * 3), seq = [];
+  for (var q = 0; q < 400; q++) seq.push('ATCG'[Math.floor(Math.random() * 4)]);
+  for (i = 0; i < N; i++) {
+    var f0 = Math.random();
+    DROLE[i] = f0 < 0.5 ? (Math.random() < 0.5 ? 0 : 1) : 2;
+    DS[i] = Math.random(); DT[i] = Math.random();
+    DJ[i * 3] = (Math.random() - 0.5) * 0.04; DJ[i * 3 + 1] = (Math.random() - 0.5) * 0.04; DJ[i * 3 + 2] = (Math.random() - 0.5) * 0.04;
+  }
+  function buildDNA(halfLen) {
+    var turns = halfLen * 2 / 1.7, rungs = Math.round(turns * 11), RAD = 0.45;
+    function strand(s, which) {
+      var th = s * Math.PI * 2 * turns + (which ? Math.PI : 0);
+      return [-halfLen + 2 * halfLen * s, RAD * Math.cos(th), RAD * Math.sin(th)];
+    }
+    for (var i = 0; i < N; i++) {
+      var p, col, i3 = i * 3;
+      if (DROLE[i] < 2) { p = strand(DS[i], DROLE[i]); col = INK; }
+      else {
+        var rk = Math.floor(DS[i] * rungs), rs = (rk + 0.5) / rungs, a = strand(rs, 0), b = strand(rs, 1), t = DT[i];
+        p = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+        col = t < 0.5 ? BASE[seq[rk % 400]] : BASE[PAIR[seq[rk % 400]]];
+      }
+      set(DNA, i, p[0] + DJ[i3], p[1] + DJ[i3 + 1], p[2] + DJ[i3 + 2], 0, 0, 1, col, 0);
+    }
+  }
+
+  var SHAPES = [DNA, TOM, PEP], NAMES = ['DNA', 'Tomato', 'Pepper'];
+  var DLY = new Float32Array(N), ARC = new Float32Array(N * 3), CV = new Float32Array(N);
+  for (i = 0; i < N; i++) {
+    DLY[i] = Math.random() * 0.35; CV[i] = (Math.random() - 0.5) * 14;
+    ARC[i * 3] = (Math.random() - 0.5) * 0.6; ARC[i * 3 + 1] = (Math.random() - 0.5) * 0.4; ARC[i * 3 + 2] = (Math.random() - 0.5) * 0.4;
+  }
+
+  // ---------- Canvas (wide) ----------
+  var W, H, dpr, img, data, zbuf, ps, S;
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    W = Math.round(canvas.clientWidth * dpr); H = Math.round(canvas.clientHeight * dpr);
+    canvas.width = W; canvas.height = H;
+    img = ctx.createImageData(W, H); data = img.data; zbuf = new Float32Array(W * H);
+    ps = Math.max(1, Math.round(dpr));
+    S = H * 0.4;
+    buildDNA(Math.max(1.2, (W / 2) / S * 0.9));
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // ---------- State: click to move to the next shape ----------
+  var cur = 0, nxt = 0, mt = 1, MORPH = 2.2, lastT = performance.now();
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function advance() {
+    if (mt < 1) return;                       // wait for the current change to finish
+    cur = nxt; nxt = (cur + 1) % SHAPES.length; mt = 0;
+  }
+  canvas.addEventListener('click', advance);
+  canvas.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); advance(); } });
+
+  var L = [-0.45, 0.6, 0.66], Ln = Math.hypot(L[0], L[1], L[2]); L = [L[0] / Ln, L[1] / Ln, L[2] / Ln];
+  var spin = 0, yaw = 0.4, PITCH = 0.22;
+  // Each shape has its own motion: DNA spins on its long axis, fruits turn around the vertical
+  function view(k, x, y, z, out) {
+    if (k === 0) {
+      var c = Math.cos(spin), s = Math.sin(spin);
+      out[0] = x; out[1] = y * c - z * s; out[2] = y * s + z * c;
+    } else {
+      var cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(PITCH), sp = Math.sin(PITCH);
+      var X = x * cy - z * sy, Z = x * sy + z * cy;
+      out[0] = X; out[1] = y * cp - Z * sp; out[2] = y * sp + Z * cp;
+    }
+  }
+  var VA = [0, 0, 0], VB = [0, 0, 0], NA = [0, 0, 0], NB = [0, 0, 0];
+
+  function render() {
+    var A = SHAPES[cur], B = SHAPES[nxt], moving = cur !== nxt && mt < 1, ka = cur, kb = nxt;
+    var hx = W / 2, hy = H / 2;
+    data.fill(0); zbuf.fill(-1e9);
+    for (var i = 0; i < N; i++) {
+      var i3 = i * 3, e = moving ? smooth((mt - DLY[i]) / 0.65) : 1;
+      if (!moving) { ka = kb = nxt; A = B = SHAPES[nxt]; }
+      view(ka, A.p[i3], A.p[i3 + 1], A.p[i3 + 2], VA); view(kb, B.p[i3], B.p[i3 + 1], B.p[i3 + 2], VB);
+      var x = lerp(VA[0], VB[0], e), y = lerp(VA[1], VB[1], e), z = lerp(VA[2], VB[2], e);
+      if (moving) { var arc = Math.sin(Math.PI * e); x += ARC[i3] * arc; y += ARC[i3 + 1] * arc; z += ARC[i3 + 2] * arc; }
+
+      var lit = lerp(A.lit[i], B.lit[i], e), shade = 1;
+      if (lit > 0) {
+        view(ka, A.n[i3], A.n[i3 + 1], A.n[i3 + 2], NA); view(kb, B.n[i3], B.n[i3 + 1], B.n[i3 + 2], NB);
+        var nx = lerp(NA[0], NB[0], e), ny = lerp(NA[1], NB[1], e), nz = lerp(NA[2], NB[2], e);
+        var dot = (nx * L[0] + ny * L[1] + nz * L[2]) / (Math.hypot(nx, ny, nz) || 1);
+        shade = lerp(1, clamp(0.3 + 0.75 * Math.max(0, dot), 0, 1.05), lit);
+      } else {
+        shade = 0.75 + 0.3 * clamp((z + 0.45) / 0.9, 0, 1);    // depth cue for the helix
+      }
+      var m = 0.35 + 0.65 * shade;
+      var f = 1 + 0.1 * z, ix = Math.round(hx + x * f * S), iy = Math.round(hy - y * f * S);
+      if (ix < 0 || iy < 0 || ix > W - ps || iy > H - ps) continue;
+      var rC = clamp(lerp(A.c[i3], B.c[i3], e) * m + CV[i], 0, 255),
+          gC = clamp(lerp(A.c[i3 + 1], B.c[i3 + 1], e) * m + CV[i], 0, 255),
+          bC = clamp(lerp(A.c[i3 + 2], B.c[i3 + 2], e) * m + CV[i], 0, 255);
+      for (var oy = 0; oy < ps; oy++) for (var ox = 0; ox < ps; ox++) {
+        var idx = (iy + oy) * W + ix + ox;
+        if (z <= zbuf[idx]) continue;
+        zbuf[idx] = z;
+        var o = idx * 4; data[o] = rC; data[o + 1] = gC; data[o + 2] = bC; data[o + 3] = 255;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+  }
+
+  var lastName = '';
+  function frame(now) {
+    var dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
+    if (mt < 1) mt = Math.min(1, mt + dt / MORPH);
+    if (!reduce) { spin += dt * 0.5; yaw += dt * 0.35; }
+    var name = NAMES[mt < 0.5 ? cur : nxt];
+    if (name !== lastName && stageEl) { stageEl.textContent = name; lastName = name; }
+    render();
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
